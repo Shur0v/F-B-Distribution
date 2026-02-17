@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { ViewMode } from './types';
 import HomePage from './pages/HomePage';
@@ -22,13 +22,13 @@ const App: React.FC = () => {
           <div className="flex gap-4 items-center">
             <span className="font-bold opacity-75 uppercase tracking-widest">Wireframe Controller</span>
             <div className="flex bg-gray-700 rounded p-1">
-              <button 
+              <button
                 onClick={() => setViewMode(ViewMode.DESKTOP)}
                 className={`px-3 py-1 rounded transition ${viewMode === ViewMode.DESKTOP ? 'bg-white text-gray-900' : 'text-gray-400 hover:text-white'}`}
               >
                 Desktop
               </button>
-              <button 
+              <button
                 onClick={() => setViewMode(ViewMode.MOBILE)}
                 className={`px-3 py-1 rounded transition ${viewMode === ViewMode.MOBILE ? 'bg-white text-gray-900' : 'text-gray-400 hover:text-white'}`}
               >
@@ -36,9 +36,9 @@ const App: React.FC = () => {
               </button>
             </div>
             <label className="flex items-center gap-2 cursor-pointer">
-              <input 
-                type="checkbox" 
-                checked={showAnnotations} 
+              <input
+                type="checkbox"
+                checked={showAnnotations}
                 onChange={(e) => setShowAnnotations(e.target.checked)}
                 className="w-4 h-4 rounded border-gray-300"
               />
@@ -52,17 +52,16 @@ const App: React.FC = () => {
 
         {/* Viewport Emulator */}
         <div className={`flex-1 flex justify-center p-4 lg:p-10 transition-all duration-300 ${viewMode === ViewMode.MOBILE ? 'bg-gray-200' : ''}`}>
-          <div 
-            className={`bg-white shadow-2xl overflow-hidden relative transition-all duration-500 flex flex-col ${
-              viewMode === ViewMode.MOBILE 
-                ? 'w-[375px] max-w-full h-[812px] rounded-[3rem] border-[8px] border-gray-900 ring-4 ring-gray-400' 
+          <div
+            className={`bg-white shadow-2xl overflow-hidden relative transition-all duration-500 flex flex-col ${viewMode === ViewMode.MOBILE
+                ? 'w-[375px] max-w-full h-[812px] rounded-[3rem] border-[8px] border-gray-900 ring-4 ring-gray-400'
                 : 'w-full max-w-6xl min-h-screen'
-            }`}
+              }`}
           >
             {/* Scrollable Content Area */}
             <div className="flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar bg-white">
               <Navigation viewMode={viewMode} />
-              
+
               <main className="relative">
                 <Routes>
                   <Route path="/" element={<HomePage viewMode={viewMode} />} />
@@ -71,7 +70,7 @@ const App: React.FC = () => {
                   <Route path="/markets" element={<MarketsPage viewMode={viewMode} />} />
                   <Route path="/contact" element={<ContactPage viewMode={viewMode} />} />
                 </Routes>
-                
+
                 {showAnnotations && <AnnotationLayer viewMode={viewMode} />}
               </main>
 
